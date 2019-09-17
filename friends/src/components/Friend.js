@@ -8,10 +8,8 @@ width: 100%;
 `;
 
  const Friend = (props) => {
-     console.log (props)
 
     return (
-
         
         <CardDiv>
             <Card.Group>
