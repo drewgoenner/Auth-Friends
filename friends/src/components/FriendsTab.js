@@ -1,27 +1,39 @@
-import React, { Component } from 'react';
-import { Segment, Tab } from 'semantic-ui-react';
-import Login from './Login';
-import FriendsList from './FriendsList';
+import React from 'react';
+import { Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-const panes = [
-    { menuItem: 'Login', render: () => <Tab.Pane>{Login}</Tab.Pane>},
-    { menuItem: 'Friends', render: () => <Tab.Pane >{FriendsList}</Tab.Pane>}
-    
-  ]
+class FriendsTab extends React.Component {
+    state ={}
 
-class FriendsTab extends Component {
-    state = {}
-
-    handleChange = (e, data) => this.setState(data)
+    handleItemClick = (e, {name}) => this.setState({activeItem: name});
 
     render() {
-        return (
-            <div>
-                <Tab panes={panes} onTabChange={this.handleChange} />
-                <Segment tertiary>
-                    <pre>{JSON.stringify(this.state, null, 1)}</pre>
-                </Segment>
-            </div>
+        const { activeItem } =this.state;
+
+        return(
+            <Menu inverted>
+                <Menu.Item
+                    as={Link} to ='login'
+                    name='login'
+                    active={activeItem === 'login'}
+                    onClick={this.handleItemClick}>
+                        Login
+                </Menu.Item>
+                <Menu.Item
+                    as={Link} to ='protected'
+                    name='protected'
+                    active={activeItem === 'protected'}
+                    onClick={this.handleItemClick}>
+                        Friends
+                </Menu.Item>
+                <Menu.Item
+                    as={Link} to ='addfriend'
+                    name='addfriend'
+                    active={activeItem === 'addfriend'}
+                    onClick={this.handleItemClick}>
+                        Add Friend
+                </Menu.Item>
+            </Menu>
         )
     }
 }
